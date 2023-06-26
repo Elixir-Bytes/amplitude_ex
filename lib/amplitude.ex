@@ -17,8 +17,13 @@ defmodule Amplitude do
       "success"
   """
   def track(event_type, user_id, event_props \\ %{}, user_props \\ %{})
+
   def track(event_type, user_id, event_props, user_props) do
-    %{"event_type" => event_type, "user_id" => user_id, "event_properties" => event_props, "user_properties" => user_props}
-    |> api_track
+    api_track(%{
+      event_type: event_type,
+      user_id: user_id,
+      event_properties: event_props,
+      user_properties: user_props
+    })
   end
 end

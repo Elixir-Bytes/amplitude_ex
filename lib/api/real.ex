@@ -5,9 +5,9 @@ defmodule Amplitude.API.Real do
   defp api_key, do: Application.get_env(:amplitude, :api_key)
 
   def api_track(params) do
-    case Req.get(api_host(),
+    case Req.post(api_host(),
            headers: @headers,
-           params: [api_key: api_key(), event: Jason.encode!(params)]
+           json: %{api_key: api_key(), events: [params]}
          ) do
       {:ok, %Req.Response{status: 200, body: body}} ->
         {:ok, body}
